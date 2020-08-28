@@ -23,6 +23,13 @@ public class DijkstraSP {
 
     // constructor
     public DijkstraSP(EdgeWeightedDigraph G, int s) {
+
+        // Dijkstra's algo didn't work with negative weights
+        for (DirectedEdge e : G.edges()) {
+            if (e.weight() < 0)
+                throw new IllegalArgumentException("edge " + e + " has negative weight");
+        }
+
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
         pq = new IndexMinPQ<>(G.V());
